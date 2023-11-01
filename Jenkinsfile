@@ -38,7 +38,7 @@ pipeline{
     stage('Release LMS backend'){
       steps{
         script{
-        def packageJSON = readJSON file: 'webapp/package.json'
+        def packageJSON = readJSON file: 'api/package.json'
         def packageJSONVersion = packageJSON.version
         echo "${packageJSONVersion}"
         sh "zip api/dist-${packageJSONVersion}.zip -r api/dist"
