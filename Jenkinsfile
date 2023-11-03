@@ -14,11 +14,23 @@ pipeline {
                 sh 'cd webapp && sudo npm install && npm run build'
             }
         }
-        stage('Release') {
+        stage('Build lms backend') {
             steps {
-                echo 'Releasing..'
+                echo 'Backend building..'
+                sh 'cd api && sudo npm install && npm run build'
             }
         }
+        stage('Release lms frontend') {
+            steps {
+                script{
+                def packageJSON = readJSON file: 'webapp/package.json'
+              def packageJSONVersion = packageJSON.version
+              echo "${packageJSONVersion}"
+              sh "zip webapp/dist-${packageJSONVersion}.zip -r webapp/dist"
+              sh "curl -v -u admin:admin --upload-file webapp/dist-${packageJSONVersion}.zip http://13.235.71.214:8081/repository/lms/"      
+            }
+        }
+    }
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
