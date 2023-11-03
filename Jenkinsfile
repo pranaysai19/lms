@@ -11,7 +11,7 @@ pipeline {
     stage('Build lms frontend') {
             steps {
                 echo 'Frontend building..'
-                sh 'cd webapp && npm install && npm run build'
+                sh 'cd webapp && sudo npm install && npm run build'
             }
         }
         stage('Release') {
