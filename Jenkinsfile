@@ -17,7 +17,7 @@ pipeline {
          stage('Build lms backend') {
             steps {
                 echo 'Backend building..'
-                sh 'cd api && npm install && npm run build'
+                sh 'cd../ && cd api && npm install && npm run build'
             }
         }
         stage('Release') {
