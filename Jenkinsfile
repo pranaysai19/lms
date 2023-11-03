@@ -5,7 +5,7 @@ pipeline {
         stage('Sonar Analysis'){
             steps {
                 echo 'Testing..'
-            
+            }
         }
     stage('Build lms frontend') {
             steps {
