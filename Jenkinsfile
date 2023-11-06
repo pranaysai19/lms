@@ -58,5 +58,20 @@ pipeline {
            }
          }
       }
+        stage('Deploy'){
+            steps {
+                script {
+        def packageJSON = readJSON file: 'api/package.json'
+        def packageJSONVersion = packageJSON.version
+        echo"${packageJSONVersion}"
+        sh "curl -u admin:admin -X GET \'http://35.154.54.7:8081/repository/lms/dist-${packageJSONVersion}.zip\' --output dist-'${packageJSONVersion}'.zip"
+        sh 'sudo rm -rf /var/www/html/*'
+        sh "sudo unzip -o dist-'${packageJSONVersion}'.zip"
+        sh "sudo cp -r api/dist/* /var/www/html/"
+            
+                
+           }
+         }
+      }
     }
 }
