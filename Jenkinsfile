@@ -49,7 +49,7 @@ pipeline {
         def packageJSON = readJSON file: 'webapp/package.json'
         def packageJSONVersion = packageJSON.version
         echo"${packageJSONVersion}"
-        sh "curl -u admin:admin -X get \http://35.154.54.7:8081/repository/lms
+        sh "curl -u admin:admin -X get http://35.154.54.7:8081/repository/lms
         sh 'sudo rm -rf /var/www/html/*'
         sh "sudo unzip -o dist-${packageJSONVersion}.zip"
         sh "sudo cp -r webapp/dist/* /var/www/html/"
