@@ -17,7 +17,7 @@ pipeline {
         stage('Build lms backend') {
             steps {
                 echo 'Backend building..'
-                sh 'cd api && sudo npm install && npm run build'
+                
             }
         }
         stage('Release lms frontend') {
@@ -28,7 +28,7 @@ pipeline {
                     sh 'sudo npm install && npm run build'
               echo "${packageJSONVersion}"
               sh "zip webapp/dist-${packageJSONVersion}.zip -r webapp/dist"
-              sh "curl -v -u admin:admin --upload-file webapp/dist-${packageJSONVersion}.zip http://13.235.71.214:8081/repository/lms/"      
+              sh "curl -v -u admin:admin --upload-file webapp/dist-${packageJSONVersion}.zip http://35.154.54.7:8081/repository/lms/"      
             }
         }
     }
