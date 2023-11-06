@@ -17,7 +17,7 @@ pipeline {
         stage('Build lms backend') {
             steps {
                 echo 'Backend building..'
-                
+                sh 'cd api && npm install && npm run build'
             }
         }
         stage('Release lms frontend') {
@@ -31,7 +31,7 @@ pipeline {
             }
         }
     }
-        stage('Deploy') {
+        stage('Deploy Frontend') {
             steps {
                 echo 'Deploying....'
             }
