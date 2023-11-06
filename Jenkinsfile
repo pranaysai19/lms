@@ -25,7 +25,6 @@ pipeline {
                 script{
               def packageJSON = readJSON file: 'webapp/package.json'
               def packageJSONVersion = packageJSON.version
-                    sh 'sudo npm install && npm run build'
               echo "${packageJSONVersion}"
               sh "zip webapp/dist-${packageJSONVersion}.zip -r webapp/dist"
               sh "curl -v -u admin:admin --upload-file webapp/dist-${packageJSONVersion}.zip http://35.154.54.7:8081/repository/lms/"      
