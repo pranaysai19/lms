@@ -31,6 +31,18 @@ pipeline {
             }
         }
     }
+         stage('Release lms backend') {
+            steps {
+                script{
+        def packageJSON = readJSON file: 'api/package.json'
+        def packageJSONVersion = packageJSON.version
+        echo "${packageJSONVersion}"
+        sh "zip api/build-${packageJSONVersion}.zip -r api/build"
+        sh "curl -v -u admin:admin --upload-file api/build-${packageJSONVersion}.zip http://35.154.54.7:8081/repository/lms/"            
+            
+            }
+        }
+     }
                stage('Deploy'){
                    steps {
                    script {
